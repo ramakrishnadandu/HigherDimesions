@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Higher Dimensions Lab</title>
+<meta name="description" content="An interactive research lab for dimensions 0 to 11: 3D models of every dimension, the real machines that probe them, physics calculators, and a stage-gate roadmap toward a dimension-access engine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="topbar" aria-label="Sections">
+  <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>HD&nbsp;Lab</a>
+  <div class="navlinks">
+    <a href="#explorer">Dimensions</a>
+    <a href="#why">Why we can't enter</a>
+    <a href="#platform">Platform</a>
+    <a href="#calculators">Calculators</a>
+    <a href="#engine">Entry engine</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-text">
+    <p class="eyebrow">Research programme · v1.0 · Oct 2026</p>
+    <h1>Higher Dimensions Lab</h1>
+    <p class="lede">Twelve dimensions, from a single point to the 11 of M-theory. For each one: what it is, the real machine that probes it today, and the numbers that decide whether a human could ever go inside.</p>
+    <div class="hero-stats" id="heroStats">
+      <div><span class="k">Dimension</span><span class="v mono" id="hsN">4</span></div>
+      <div><span class="k">Corners</span><span class="v mono" id="hsV">16</span></div>
+      <div><span class="k">Edges</span><span class="v mono" id="hsE">32</span></div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn primary" href="#explorer">Explore dimensions</a>
+      <a class="btn" href="#calculators">Open calculators</a>
+    </div>
+    <p class="truth"><strong>Where science stands in 2026:</strong> time (the 4th dimension of spacetime) is proven and measured every day. Extra space dimensions (5th–11th) appear in theories, but no experiment has detected one, and no machine can carry matter into one. This lab shows how to test that honestly.</p>
+  </div>
+  <div class="hero-stage">
+    <canvas id="heroCanvas" aria-label="A rotating hypercube whose number of dimensions changes from 3 to 11"></canvas>
+    <div class="hero-dims" role="group" aria-label="Choose hypercube dimension">
+      <button data-n="3">3</button><button data-n="4" class="on">4</button><button data-n="5">5</button><button data-n="6">6</button><button data-n="7">7</button><button data-n="8">8</button><button data-n="9">9</button><button data-n="10">10</button><button data-n="11">11</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== EXPLORER ===================== -->
+<section id="explorer" class="band">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">01 · Dimension explorer</p>
+      <h2>Every dimension, its shape, and the machine that probes it</h2>
+      <p>Pick a dimension. Switch views to see its geometry, how extra dimensions might hide, and a 3D model of the real instrument scientists use. Drag to rotate.</p>
+    </div>
+
+    <div class="dim-rail" id="dimRail" role="tablist" aria-label="Dimensions"></div>
+
+    <div class="explorer">
+      <div class="viewport">
+        <canvas id="explorerCanvas" aria-label="3D view of the selected dimension"></canvas>
+        <div class="view-tabs" id="viewTabs" role="tablist" aria-label="Views"></div>
+        <div class="view-caption" id="viewCaption"></div>
+      </div>
+      <article class="dim-card" id="dimCard" aria-live="polite"></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY ===================== -->
+<section id="why" class="band alt">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">02 · Why we can't go inside</p>
+      <h2>Four reasons a human cannot step into a higher dimension</h2>
+      <p>Each reason comes from a real theory and points at a different experiment. Together they explain why no "portal" has ever been seen.</p>
+    </div>
+    <div class="reasons">
+      <div class="reason"><span class="tag">A</span><h3>It is curled up, tiny</h3><p>A garden hose looks like a line from far away, but an ant can walk around it. A compact dimension of radius <span class="mono">R</span> needs momentum <span class="mono">ħ/R</span> to move in. For R = 10⁻¹⁹ m that is ~2 TeV per particle.</p></div>
+      <div class="reason"><span class="tag">B</span><h3>We are stuck on a brane</h3><p>In brane-world models, the particles we are made of (electrons, quarks, light) are trapped on a 3D membrane. Only gravity leaks into the bulk. Walking cannot take you off the membrane.</p></div>
+      <div class="reason"><span class="tag">C</span><h3>Not every "dimension" is space</h3><p>AI models use thousands of mathematical dimensions. A quantum state lives in a huge Hilbert space. Neither is a direction you can walk in.</p></div>
+      <div class="reason"><span class="tag">D</span><h3>Physics needs exactly 3</h3><p>In 4 or more large space dimensions, gravity falls off as 1/r³ or faster. Planets spiral into stars and atoms collapse. The demo on the right shows it.</p></div>
+    </div>
+
+    <div class="orbit-lab">
+      <div class="orbit-view">
+        <canvas id="orbitCanvas" aria-label="Orbit simulation in different numbers of space dimensions"></canvas>
+      </div>
+      <div class="orbit-ctl">
+        <h3>Orbit stability simulator</h3>
+        <p>A planet starts on a near-circular orbit with a small push. Gravity in <span class="mono">d</span> space dimensions falls as <span class="mono">F ∝ 1/r<sup>d−1</sup></span>.</p>
+        <div class="seg" id="orbitDims" role="group" aria-label="Space dimensions">
+          <button data-d="2">2D</button><button data-d="3" class="on">3D</button><button data-d="4">4D</button><button data-d="5">5D</button><button data-d="6">6D</button>
+        </div>
+        <label class="field" for="orbitKick"><span>Push off circular orbit</span><span class="mono" id="orbitKickVal">4%</span></label>
+        <input type="range" id="orbitKick" min="0" max="15" step="1" value="4">
+        <div class="verdict" id="orbitVerdict"></div>
+        <button class="btn small" id="orbitReset">Restart orbit</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PLATFORM ===================== -->
+<section id="platform" class="band">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">03 · Research platform</p>
+      <h2>The machine we can build first: a Higher-Dimension Research Platform</h2>
+      <p>Each block is a component. Data flows from theory and experiments into the Evidence Engine, which decides whether a stage gate is passed. Click a block to see what it does, what it needs and when it counts as working.</p>
+    </div>
+    <div class="platform">
+      <div class="viewport tall">
+        <canvas id="platformCanvas" aria-label="3D block diagram of the research platform"></canvas>
+        <div class="view-caption">Drag to rotate · click a block</div>
+      </div>
+      <div class="block-panel">
+        <div class="block-list" id="blockList" role="tablist" aria-label="Platform components"></div>
+        <article class="block-info" id="blockInfo" aria-live="polite"></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CALCULATORS ===================== -->
+<section id="calculators" class="band alt">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">04 · Calculators</p>
+      <h2>Change the numbers, see what physics allows</h2>
+      <p>Every result uses published formulas and constants. Values marked "limit" are current experimental bounds.</p>
+    </div>
+    <div class="calc-tabs" role="tablist" aria-label="Calculators">
+      <button role="tab" data-calc="geo" class="on">Hypercube &amp; hypersphere</button>
+      <button role="tab" data-calc="add">Extra-dimension size</button>
+      <button role="tab" data-calc="time">Time travel (4D)</button>
+      <button role="tab" data-calc="grav">Short-range gravity</button>
+    </div>
+
+    <div class="calc" data-panel="geo">
+      <div class="calc-in">
+        <label class="field" for="geoN"><span>Number of dimensions n</span><span class="mono" id="geoNVal">4</span></label>
+        <input type="range" id="geoN" min="0" max="11" step="1" value="4">
+        <label class="field" for="geoR"><span>Radius / half-side r (m)</span></label>
+        <input type="number" id="geoR" value="1" min="0.001" step="0.1">
+        <div class="formula">
+          <div>k-faces of n-cube = C(n,k) · 2<sup>n−k</sup></div>
+          <div>V<sub>n</sub>(r) = π<sup>n/2</sup> r<sup>n</sup> / Γ(n/2 + 1)</div>
+          <div>Gravity in n space dims: F ∝ 1/r<sup>n−1</sup></div>
+        </div>
+      </div>
+      <div class="calc-out">
+        <dl class="kv" id="geoOut"></dl>
+        <div class="table-wrap"><table id="geoTable"></table></div>
+        <canvas id="ballChart" class="chart" aria-label="Unit n-ball volume by dimension"></canvas>
+      </div>
+    </div>
+
+    <div class="calc" data-panel="add" hidden>
+      <div class="calc-in">
+        <label class="field" for="addN"><span>Extra space dimensions n</span><span class="mono" id="addNVal">2</span></label>
+        <input type="range" id="addN" min="1" max="7" step="1" value="2">
+        <label class="field" for="addM"><span>Gravity's true strength scale M<sub>D</sub></span><span class="mono" id="addMVal">10 TeV</span></label>
+        <input type="range" id="addM" min="0" max="2" step="0.01" value="1">
+        <div class="formula">
+          <div>ADD model (1998): M<sub>Pl</sub>² = M<sub>D</sub><sup>n+2</sup> · R<sup>n</sup></div>
+          <div>R = (M<sub>Pl</sub>² / M<sub>D</sub><sup>n+2</sup>)<sup>1/n</sup> · ħc</div>
+          <div>KK graviton spacing: Δm = ħc / R</div>
+        </div>
+      </div>
+      <div class="calc-out">
+        <dl class="kv" id="addOut"></dl>
+        <canvas id="scaleChart" class="chart wide" aria-label="Size of the extra dimension on a logarithmic scale compared with known objects"></canvas>
+        <div class="verdict" id="addVerdict"></div>
+      </div>
+    </div>
+
+    <div class="calc" data-panel="time" hidden>
+      <div class="calc-in">
+        <label class="field" for="tV"><span>Ship speed v</span><span class="mono" id="tVVal">0.990 c</span></label>
+        <input type="range" id="tV" min="0" max="1" step="0.0005" value="0.99">
+        <label class="field" for="tTau"><span>Years felt on the ship</span></label>
+        <input type="number" id="tTau" value="2" min="0.1" step="0.1">
+        <label class="field" for="tH"><span>Height above ground for gravity clock (m)</span></label>
+        <input type="number" id="tH" value="20200000" min="0" step="1000">
+        <div class="formula">
+          <div>γ = 1 / √(1 − v²/c²)</div>
+          <div>Δt<sub>Earth</sub> = γ · Δτ<sub>ship</sub></div>
+          <div>Gravity: Δt/t ≈ GM/c² · (1/R<sub>E</sub> − 1/(R<sub>E</sub>+h))</div>
+        </div>
+      </div>
+      <div class="calc-out">
+        <dl class="kv" id="timeOut"></dl>
+        <canvas id="timeChart" class="chart" aria-label="Lorentz factor against speed"></canvas>
+      </div>
+    </div>
+
+    <div class="calc" data-panel="grav" hidden>
+      <div class="calc-in">
+        <label class="field" for="gR"><span>Size of extra dimension R</span><span class="mono" id="gRVal">40 µm</span></label>
+        <input type="range" id="gR" min="-7" max="-3" step="0.01" value="-4.398">
+        <label class="field" for="gN"><span>Number of large extra dims n</span><span class="mono" id="gNVal">1</span></label>
+        <input type="range" id="gN" min="1" max="3" step="1" value="1">
+        <label class="field" for="gr"><span>Distance between test masses r</span><span class="mono" id="grVal">10 µm</span></label>
+        <input type="range" id="gr" min="-7" max="-2" step="0.01" value="-5">
+        <div class="formula">
+          <div>r ≫ R: F = G m₁m₂ / r²</div>
+          <div>r ≪ R: F ≈ G m₁m₂ / r² · (R/r)<sup>n</sup></div>
+          <div>Tested by torsion balances to ~50 µm</div>
+        </div>
+      </div>
+      <div class="calc-out">
+        <dl class="kv" id="gravOut"></dl>
+        <canvas id="gravChart" class="chart" aria-label="Gravity strength against distance with and without extra dimensions"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ENGINE ===================== -->
+<section id="engine" class="band">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">05 · Entry engine</p>
+      <h2>What a machine to carry a human into a dimension would need</h2>
+      <p>Treat it as an engineering spec. Set the size of the dimension and the traveller's mass. The engine below lights up each subsystem that physics allows today, and marks the ones that are blocked.</p>
+    </div>
+    <div class="engine">
+      <div class="calc-in">
+        <label class="field" for="eR"><span>Radius of the extra dimension R</span><span class="mono" id="eRVal">1.26×10⁻¹⁹ m</span></label>
+        <input type="range" id="eR" min="-35" max="0" step="0.05" value="-18.9">
+        <label class="field" for="eM"><span>Traveller mass (kg)</span></label>
+        <input type="number" id="eM" value="70" min="1" step="1">
+        <label class="field" for="eSM"><span>Can ordinary matter move in it?</span></label>
+        <div class="seg" id="eSM" role="group" aria-label="Which particles can move in the dimension">
+          <button data-sm="grav">Gravity only (brane)</button><button data-sm="all" class="on">All matter (UED)</button>
+        </div>
+        <div class="formula">
+          <div>Per particle: E ≥ ħc / R</div>
+          <div>Nucleons in body: N = m / m<sub>p</sub></div>
+          <div>Total: E<sub>entry</sub> = N · ħc / R</div>
+        </div>
+      </div>
+      <div class="engine-out">
+        <div class="viewport mid">
+          <canvas id="engineCanvas" aria-label="3D model of the entry engine subsystems"></canvas>
+        </div>
+        <dl class="kv" id="engineOut"></dl>
+        <ol class="subsystems" id="subsystems"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ROADMAP ===================== -->
+<section id="roadmap" class="band alt">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">06 · Stage-gate roadmap</p>
+      <h2>How it becomes reality: each stage unlocks only when its criteria are met</h2>
+      <p>Tick criteria as your project meets them; progress is saved in this browser. Each stage also shows where the world's science stands in 2026.</p>
+    </div>
+    <div class="meter"><div class="meter-bar"><span id="meterFill"></span></div><span class="mono" id="meterText">0 of 0 criteria</span></div>
+    <div class="stages" id="stages"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="band foot">
+  <div class="inner">
+    <p><strong>Sources.</strong> Kaluza (1921), Klein (1926); Arkani-Hamed, Dimopoulos &amp; Dvali (1998); Randall &amp; Sundrum (1999); Witten (1995); Lee et al., Eöt-Wash torsion balance, PRL 124 (2020); CMS &amp; ATLAS monojet searches; Pardo et al., GW170817 extra-dimension test (2018); Particle Data Group review "Extra Dimensions"; Chou et al., optical clocks and relativity, Science (2010); Ehrenfest (1917) on why space has three dimensions.</p>
+    <p>Costs are rough estimates in Indian rupees for planning only. Calculators use order-of-magnitude physics; factors of 2π differ between conventions.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="js/data.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/machines.js"></script>
+<script src="js/app.js"></script>
+<script src="js/calc.js"></script>
+</body>
+</html>
